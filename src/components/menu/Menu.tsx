@@ -52,14 +52,10 @@ const handleMenuOptions = (futureExchangeProducts: any) => {
 }
 
 export const Menu: React.FC = () => {
-
     const [items, setItems] = useState(handleMenuOptions(futureExchangeProducts))
-    // setItems(handleMenuOptions(futureExchangeProducts));
-
     const onClick: MenuProps['onClick'] = e => {
         console.log('click', e);
     }
-
     return (
         <AntdMenu
             mode="inline"

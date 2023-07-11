@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import styles from "./App.module.css"
-import { Menu } from './components';
+import { Menu, Header, Footer } from './components';
 
 function App() {
   return (
@@ -9,11 +9,15 @@ function App() {
       <Layout className={styles["global-layout"]}>
         <Layout.Sider className={styles["global-sider"]} width={256}>
           <Menu />
-        </Layout.Sider>
+        </Layout.Sider> 
         <Layout className={styles["content-layout"]}>
-          <Layout.Header className={styles["layout-header"]}>头部</Layout.Header>
+          <Layout.Header className={styles["layout-header"]}>
+            <Header />
+          </Layout.Header>
           <Layout.Content className={styles["layout-content"]}>内容</Layout.Content>
-          <Layout.Footer className={styles["layout-footer"]}>底部</Layout.Footer>
+          <Layout.Footer className={styles["layout-footer"]}>
+            <Footer/>
+          </Layout.Footer>
         </Layout>
       </Layout>
     </div>
