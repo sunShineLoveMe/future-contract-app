@@ -40,8 +40,6 @@ const handleMenuOptions = (futureExchangeProducts: any) => {
     futureExchanges.forEach((item: any) => {
         const exchangeProducts = 
             futureExchangeProducts.filter((product: any) => product.exchange === item.code);
-        console.log(exchangeProducts);
-        console.log("--------------");
         menuItems.push(
             getItem(`${item.name}--${item.code}`, 
             item.code, 
@@ -49,28 +47,14 @@ const handleMenuOptions = (futureExchangeProducts: any) => {
             exchangeProducts.map((product: any) => {
                 return getItem(`${product.code}-${product.name}`, product.code);
         }))); 
-        console.log(menuItems);
     })
+    return menuItems;
 }
 
 export const Menu: React.FC = () => {
 
-    const [items, setItems] = useState(
-        [
-            getItem('Navigation One', 'sub1', <CodeSandboxOutlined />, [
-                getItem('Option 1', '1'),
-                getItem('Option 2', '2'),
-                getItem('Option 3', '3'),
-                getItem('Option 4', '4'),
-            ]),
-            getItem('Navigation Three', 'sub4', <CodeSandboxOutlined />, [
-                getItem('Option 9', '9'),
-                getItem('Option 10', '10'),
-                getItem('Option 11', '11'),
-                getItem('Option 12', '12'),
-            ]),
-        ]
-    )
+    const [items, setItems] = useState(handleMenuOptions(futureExchangeProducts))
+    // setItems(handleMenuOptions(futureExchangeProducts));
 
     const onClick: MenuProps['onClick'] = e => {
         console.log('click', e);
