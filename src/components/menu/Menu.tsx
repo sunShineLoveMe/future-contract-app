@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from './Menu.module.css'
-import { CodeSandboxOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
+import { CodeSandboxOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu as AntdMenu } from "antd";
+import { futureExchangeProducts, futureExchangesCode, futureExchanges } from "../../mockData/mockData";
+import { configConsumerProps } from "antd/es/config-provider";
 
 // 这段代码主要是标识menuProps对象中items属性的值的类型，即数组中任意元素的类型
 type MenuItem = Required<MenuProps>['items'][number];
+// console.log(futureExchangesCode);
 
 /**
  * 
@@ -32,45 +35,53 @@ function getItem(
     } as MenuItem;
 }
 
-const items: MenuItem[] = [
-    getItem('Navigation One', 'sub1', <CodeSandboxOutlined />, [
-        getItem('Option 1', '1'),
-        getItem('Option 2', '2'),
-        getItem('Option 3', '3'),
-        getItem('Option 4', '4'),
-    ]),
-    getItem('Navigation Three', 'sub4', <CodeSandboxOutlined />, [
-        getItem('Option 9', '9'),
-        getItem('Option 10', '10'),
-        getItem('Option 11', '11'),
-        getItem('Option 12', '12'),
-    ]),
-]
-
-// submenu keys of first level
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+const handleMenuOptions = (futureExchangeProducts: any) => {
+    const menuItems: any[] = [];
+    futureExchanges.forEach((item: any) => {
+        const exchangeProducts = 
+            futureExchangeProducts.filter((product: any) => product.exchange === item.code);
+        console.log(exchangeProducts);
+        console.log("--------------");
+        menuItems.push(
+            getItem(`${item.name}--${item.code}`, 
+            item.code, 
+            <CodeSandboxOutlined />, 
+            exchangeProducts.map((product: any) => {
+                return getItem(`${product.code}-${product.name}`, product.code);
+        }))); 
+        console.log(menuItems);
+    })
+}
 
 export const Menu: React.FC = () => {
 
-    // 当前展开的subMenu菜单项 key 数组 string[]
-    const [openKeys, setOpenKeys] = useState(['sub1']);
+    const [items, setItems] = useState(
+        [
+            getItem('Navigation One', 'sub1', <CodeSandboxOutlined />, [
+                getItem('Option 1', '1'),
+                getItem('Option 2', '2'),
+                getItem('Option 3', '3'),
+                getItem('Option 4', '4'),
+            ]),
+            getItem('Navigation Three', 'sub4', <CodeSandboxOutlined />, [
+                getItem('Option 9', '9'),
+                getItem('Option 10', '10'),
+                getItem('Option 11', '11'),
+                getItem('Option 12', '12'),
+            ]),
+        ]
+    )
 
-    // subMenu展开或关闭的回调
-    // 表示将onOpenChange定义为一个函数类型，它接受一个字符串数组类型的参数
-    const onOpenChange: MenuProps['onOpenChange'] = keys => {
-        const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
-        if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-            setOpenKeys(keys);
-        } else {
-            setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-        }
-    };
+    const onClick: MenuProps['onClick'] = e => {
+        console.log('click', e);
+    }
+
     return (
         <AntdMenu
             mode="inline"
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}
             style={{ width: 256 }}
+            defaultOpenKeys={['sub1']}
+            onClick={onClick}
             items={items}
             theme="dark"
         />

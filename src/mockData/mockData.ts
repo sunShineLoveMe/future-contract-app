@@ -569,3 +569,12 @@ export const excelColumnsTypes = [
         format: '元'
     }
 ]
+
+// const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+export const futureExchangesCode = futureExchanges.map((item) => {
+    return {
+        code: item.code,
+        name: item.name,
+    }
+})
+
