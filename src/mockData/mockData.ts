@@ -518,3 +518,54 @@ export const futureExchangeProducts = [
         exchange: 'XSGE',
     }
 ]
+
+export const excelColumnsTypes = [
+    {
+        title: '时间',
+        code: 'date',
+        type: 'object',
+        format: 'YYYY/MM/DD',
+    }, 
+    {
+        title: '开盘',
+        code: 'open',
+        type: 'float64',
+        format: '元/手'
+    }, 
+    {
+        title: '最高',
+        code: 'high',
+        type: 'float64',
+        format: '元/手'
+    },
+    {
+        title: '最低',
+        code: 'low',
+        type: 'float64',
+        format: '元/手'
+    },
+    {
+        title: '收盘',
+        code: 'close',
+        type: 'float64',
+        format: '元/手'
+    }, 
+    {
+        title: '成交量',
+        code: 'volume',
+        type: 'float64',
+        format: '手'
+    }, 
+    {
+        title: '持仓量',
+        code: 'openInterest',
+        type: 'float64',
+        format: '手'
+    }, 
+    {
+        title: '成交额',
+        code: 'money',
+        type: 'float64',
+        format: '元'
+    }
+]
