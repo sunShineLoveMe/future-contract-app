@@ -18,3 +18,14 @@ export const generateData = (theta: any, min: any, max: any) => {
     }
     return data;
 }
+
+export const generateGrid3DData = () => {
+    var data: any[] = [null];
+    for (var i = 0; i <= 10; i++) {
+      for (var j = 0; j <= 10; j++) {
+        var value = noise2D(i / 5, j / 5);
+        data.push([i, j, value * 2 + 4]);
+      }
+    }
+    return data;
+}

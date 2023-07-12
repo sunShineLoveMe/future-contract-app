@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as echarts from 'echarts/core';
 import styles from './Metal3DBar.module.css'
 import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
+import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
 
 export const Metal3DBar: React.FC = () => {
 
