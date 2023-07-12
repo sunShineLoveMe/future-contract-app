@@ -81,6 +81,7 @@ export const Grid3DBarOptions = {
         type: 'value'
     },
     grid3D: {
+        top: -40,
         environment: '#000',
         axisPointer: {
             show: false
