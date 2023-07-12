@@ -13,7 +13,7 @@ export const Metal3DBar: React.FC = () => {
         const metal3DBarEchart = echarts.init(
             chartRef.current as unknown as HTMLDivElement, undefined, {
                 width: 1000,
-                height: 650,
+                height: 700,
             }
         );
 

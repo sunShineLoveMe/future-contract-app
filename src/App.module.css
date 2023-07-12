@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -56,37 +56,35 @@
 }
 
 .content-layout {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .layout-header {
-  flex: 0 0 auto;
   background-color: #001529;
   color: white;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .layout-content {
-  text-align: center;
-  /* align-items: center;
-  justify-content: center; */
-  /* flex: 1 0 auto; */
-  padding: 20px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
   background-color: #000;
+  width: 100%;
 }
 
 .layout-footer {
-  flex: 0 0 auto;
   background-color: #001529;
   color: white;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
