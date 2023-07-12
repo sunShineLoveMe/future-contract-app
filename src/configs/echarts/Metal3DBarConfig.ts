@@ -25,6 +25,8 @@ export const Metal3DBarOptions = {
         axisPointer: {
             show: false
         },
+        // postEffect: 后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。
+        // SSAO: 是否开启环境光遮蔽
         postEffect: {
             enable: true,
             SSAO: {
@@ -54,8 +56,8 @@ export const Metal3DBarOptions = {
             bevelSmoothness: 4,
             shading: 'realistic',
             realisticMaterial: {
-                roughness: 0.3,
-                metalness: 1
+                roughness: 0.86,
+                metalness: 0.95
             },
             label: {
                 textStyle: {

@@ -44,7 +44,7 @@ export const Grid3DBarOptions = {
         // viewControl用于鼠标的旋转，缩放等视角控制
         // autoRotateSpeed 旋转速度
         viewControl: {
-            autoRotate: true,
+            autoRotate: false,
             autoRotateSpeed: 6
         },
         light: {

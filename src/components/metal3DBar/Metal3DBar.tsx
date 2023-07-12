@@ -7,7 +7,7 @@ import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
 export const Metal3DBar: React.FC = () => {
 
     const chartRef = useRef(null);
-    const [option, setOption] = useState(Metal3DBarOptions);
+    const [option, setOption] = useState(Grid3DBarOptions);
 
     useEffect(() => {
         const metal3DBarEchart = echarts.init(
