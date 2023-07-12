@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import styles from "./App.module.css"
-import { Menu, Header, Footer } from './components';
+import { Menu, Header, Footer, Metal3DBar } from './components';
 
 function App() {
   return (
@@ -14,7 +14,9 @@ function App() {
           <Layout.Header className={styles["layout-header"]}>
             <Header />
           </Layout.Header>
-          <Layout.Content className={styles["layout-content"]}>内容</Layout.Content>
+          <Layout.Content className={styles["layout-content"]}>
+            <Metal3DBar/>
+          </Layout.Content>
           <Layout.Footer className={styles["layout-footer"]}>
             <Footer/>
           </Layout.Footer>
