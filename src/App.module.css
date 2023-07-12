@@ -72,9 +72,14 @@
 
 .layout-content {
   text-align: center;
-  flex: 1 0 auto;
+  /* align-items: center;
+  justify-content: center; */
+  /* flex: 1 0 auto; */
   padding: 20px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #000;
 }
 
 .layout-footer {

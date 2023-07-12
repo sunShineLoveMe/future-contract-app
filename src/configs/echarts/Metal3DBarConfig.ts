@@ -1,4 +1,11 @@
 import { ROOT_PATH, generateData } from "../calculate"
+import * as echarts from 'echarts/core'
+import { TooltipComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { Bar3DChart } from 'echarts-gl/charts';
+import { Grid3DComponent } from 'echarts-gl/components';
+
+echarts.use([TooltipComponent, Grid3DComponent, Bar3DChart, CanvasRenderer]);
 
 export const Metal3DBarOptions = {
     tooltip: {},
@@ -29,8 +36,9 @@ export const Metal3DBarOptions = {
             main: {
                 intensity: 3
             },
+            // 使用纹理作为环境光的光源，会为物体提供漫反射和高光反射
             ambientCubemap: {
-                texture: ROOT_PATH + '/data-gl/asset/pisa.hdr',
+                texture: '../../assets/images/data-gl/asset/pisa.hdr',
                 exposure: 1,
                 diffuseIntensity: 0.5,
                 specularIntensity: 2

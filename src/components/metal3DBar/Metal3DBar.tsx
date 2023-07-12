@@ -1,29 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as echarts from 'echarts/core';
 import styles from './Metal3DBar.module.css'
 import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
 
 export const Metal3DBar: React.FC = () => {
 
-    const chartRef: React.MutableRefObject<null> = useRef(null);
+    const chartRef = useRef(null);
+    const [option, setOption] = useState(Metal3DBarOptions);
 
     useEffect(() => {
         const metal3DBarEchart = echarts.init(
-            chartRef.current as unknown as HTMLDivElement, 
-            undefined, 
-            {
-                renderer: 'canvas',
-                useDirtyRect: false
-        });
+            chartRef.current as unknown as HTMLDivElement, undefined, {
+                width: 1000,
+                height: 650,
+            }
+        );
 
-        if(Metal3DBarOptions && typeof Metal3DBarOptions === 'object'){
-            metal3DBarEchart.setOption(Metal3DBarOptions)
+        if(option && typeof option === 'object'){
+            metal3DBarEchart.setOption(option)
         }
         window.onresize = () => {
             metal3DBarEchart.resize();
         }
-    }, [])
-
+    }, [option])
     return (
         <div className={styles.charts} ref={chartRef} />
     )

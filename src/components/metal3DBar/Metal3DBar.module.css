@@ -1,5 +1,7 @@
 .charts {
-    position: relative;
-    height: 100vh;
+    /* position: relative; */
+    /* height: 100vh; */
     overflow: hidden;
+    position: relative;
+    left: 15%;
 }
