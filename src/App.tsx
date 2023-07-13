@@ -15,7 +15,7 @@ function App() {
             <Header />
           </Layout.Header>
           <Layout.Content className={styles["layout-content"]}>
-            <Metal3DBar/>
+            {/* <Metal3DBar/> */}
           </Layout.Content>
           <Layout.Footer className={styles["layout-footer"]}>
             <Footer/>

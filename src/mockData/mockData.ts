@@ -37,12 +37,61 @@ export const futureExchangeProducts = [
         code: 'A',
         name: '豆一',
         exchange: 'XDCE',
+        subItems: [
+            {
+                key: '10001',
+                code: 'A0501',
+                name: '豆一A0501合约'
+            },
+            {
+                key: '10002',
+                code: 'A0503',
+                name: '豆一A0503合约'
+            },
+            {
+                key: '10003',
+                code: 'A0505',
+                name: '豆一A0505合约'
+            },
+            {
+                key: '10004',
+                code: 'A0507',
+                name: '豆一A0507合约'
+            },
+            {
+                key: '10005',
+                code: 'A0509',
+                name: '豆一A0509合约'
+            },
+            {
+                key: '10006',
+                code: 'A0511',
+                name: '豆一A0511合约'
+            }
+        ]
     },
     {
         key: '2',
         code: 'B',
         name: '豆二',
         exchange: 'XDCE',
+        subItems: [
+            {
+                key: '20001',
+                code: 'B0503',
+                name: '豆二B0503合约'
+            },
+            {
+                key: '20002',
+                code: 'B0505',
+                name: '豆二B0505合约'
+            },
+            {
+                key: '20003',
+                code: 'B0507',
+                name: '豆二B0507合约'
+            },
+        ]
     },
     {
         key: '3',

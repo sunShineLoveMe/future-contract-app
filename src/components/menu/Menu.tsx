@@ -39,13 +39,25 @@ const handleMenuOptions = (futureExchangeProducts: any) => {
     const menuItems: any[] = [];
     futureExchanges.forEach((item: any) => {
         const exchangeProducts = 
-            futureExchangeProducts.filter((product: any) => product.exchange === item.code);
-        menuItems.push(
+            futureExchangeProducts.filter((product: any) => product.exchange === item.code);    
+        menuItems.push( 
             getItem(`${item.name}--${item.code}`, 
             item.code, 
             <CodeSandboxOutlined />, 
             exchangeProducts.map((product: any) => {
-                return getItem(`${product.code}-${product.name}`, product.code);
+                // 同品种不同合约  豆一：0001-豆一主力合约 0002-豆一次主力合约    
+                let exchangeProductsSubMenuItems: any[] = [];
+                if(product && product.subItems && product.subItems.length > 0) {
+                    exchangeProductsSubMenuItems = product.subItems.map((subItem: any) => {
+                        return getItem(`${subItem.name}`, subItem.code)
+                    })
+                    return getItem(`${product.code}-${product.name}`, 
+                                    product.code, 
+                                    null, 
+                                    exchangeProductsSubMenuItems);
+                } else {
+                    return getItem(`${product.code}-${product.name}`, product.code);
+                }
         }))); 
     })
     return menuItems;
