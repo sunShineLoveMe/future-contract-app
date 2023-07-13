@@ -1,4 +1,4 @@
-import { ROOT_PATH, generateData } from "../calculate"
+import { generateData, handleContractData, handleMetal3DBarDataXDate } from "../calculate"
 import * as echarts from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers';
 import { Bar3DChart } from 'echarts-gl/charts';
@@ -6,6 +6,8 @@ import { Grid3DComponent } from 'echarts-gl/components';
 import { TooltipComponent, TitleComponent } from 'echarts/components';
 
 echarts.use([TitleComponent, TooltipComponent, Grid3DComponent, Bar3DChart, CanvasRenderer]);
+
+// console.log('handleMetal3DBarDataXDate', handleMetal3DBarDataXDate())
 
 export const Metal3DBarOptions = {
     title: {
@@ -32,21 +34,45 @@ export const Metal3DBarOptions = {
         }
     },
     xAxis3D: {
-        type: 'value'
+        name: '合约交易日期',
+        type: 'category',
+        data: handleMetal3DBarDataXDate(),
+        nameTextStyle: {
+            color: '#999',
+            fontSize: 14,
+            fontWeight: 'bold'
+        }
     },
     yAxis3D: {
-        type: 'value'
+        name: '合约价格(元/手)',
+        type: 'value',
+        nameTextStyle: {
+            color: '#999',
+            fontSize: 14,
+            fontWeight: 'bold'
+        }
     },
     zAxis3D: {
+        name: '合约交易量(元)',
         type: 'value',
-        max: 10,
-        min: 0
+        nameTextStyle: {
+            color: '#999',
+            fontSize: 14,
+            fontWeight: 'bold'
+        }
     },
     grid3D: {
         environment: '#000',
-        axisPointer: {
-            show: false
-        },
+        // environment: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        //     offset: 0, color: '#00aaff' // 天空颜色
+        //   }, {
+        //     offset: 0.7, color: '#998866' // 地面颜色
+        //   }, {
+        //     offset: 1, color: '#998866' // 地面颜色
+        //   }], false),
+        // axisPointer: {
+        //     show: false
+        // },
         // viewControl用于鼠标的旋转，缩放等视角控制
         // autoRotateSpeed 旋转速度
         viewControl: {
@@ -78,7 +104,7 @@ export const Metal3DBarOptions = {
     series: [
         {
             type: 'bar3D',
-            data: generateData(2, -5, 5),
+            data: handleContractData(),
             barSize: 4,
             bevelSize: 0.4,
             bevelSmoothness: 4,

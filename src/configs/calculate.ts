@@ -1,4 +1,5 @@
 import { createNoise2D } from "simplex-noise";
+import { mockContractData } from '../mockData/mockData'
 const noise2D = createNoise2D();
 
 export const ROOT_PATH = 'https://echarts.apache.org/examples';
@@ -28,4 +29,15 @@ export const generateGrid3DData = () => {
       }
     }
     return data;
+}
+
+export const handleContractData = () => {
+    return mockContractData;
+}
+
+export const handleMetal3DBarDataXDate = () => {
+    let xDate = mockContractData.map((item: any) => {
+        return item[0]
+    })
+    return xDate;
 }
