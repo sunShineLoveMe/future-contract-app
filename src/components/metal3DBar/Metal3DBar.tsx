@@ -10,10 +10,11 @@ export const Metal3DBar: React.FC = () => {
     const [option, setOption] = useState(Grid3DBarOptions);
 
     useEffect(() => {
+        console.log(Grid3DBarOptions)
         const metal3DBarEchart = echarts.init(
             chartRef.current as unknown as HTMLDivElement, undefined, {
                 width: 1000,
-                height: 750,
+                height: 700,
             }
         );
 
