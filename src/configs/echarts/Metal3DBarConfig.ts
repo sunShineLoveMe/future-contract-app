@@ -31,6 +31,13 @@ export const Metal3DBarOptions = {
         textStyle: {
             color: '#fff',
             fontWeight: 'bold',
+        },
+        formatter: function (params: any) {
+            // console.log('params', params)
+            let obj = params.data;
+            return `交易日期：${obj[0]}<br/>
+                    合约价格：${obj[1]}<br/>
+                    合约交易量：${obj[2]}<br/>`
         }
     },
     xAxis3D: {
@@ -76,7 +83,7 @@ export const Metal3DBarOptions = {
         // viewControl用于鼠标的旋转，缩放等视角控制
         // autoRotateSpeed 旋转速度
         viewControl: {
-            autoRotate: false,
+            autoRotate: true,
             autoRotateSpeed: 4
         },
         // postEffect: 后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。
@@ -86,11 +93,17 @@ export const Metal3DBarOptions = {
             SSAO: {
                 enable: true,
                 radius: 5
+            },
+            // 景深效果
+            depthOfField: {
+                enable: false
             }
         },
         light: {
             main: {
-                intensity: 3
+                intensity: 3,
+                shadow: true,
+                shadowQuality: 'high',
             },
             // 使用纹理作为环境光的光源，会为物体提供漫反射和高光反射
             ambientCubemap: {
