@@ -91,13 +91,18 @@ export const Menu: React.FC = () => {
                 setFutureExchanges(res.data.data);
                 let res2 = await axios.get('http://localhost:3000/menuList');
                 setFutureExchangeProducts(res2.data.data);
-                setItems(handleMenuOptions(futureExchanges, futureExchangeProducts))
             } catch (error) {
                 console.error(error);
             }
         }
         fetchData();
     }, [])
+
+    useEffect(() => {
+        if(futureExchanges && futureExchangeProducts) {
+            setItems(handleMenuOptions(futureExchanges, futureExchangeProducts))
+        }
+    }, [futureExchanges, futureExchangeProducts])
 
     const onClick: MenuProps['onClick'] = e => {
         console.log('click', e);
