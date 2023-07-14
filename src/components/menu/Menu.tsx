@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import styles from './Menu.module.css'
 import { CodeSandboxOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu as AntdMenu } from "antd";
-import { futureExchangeProducts, futureExchangesCode, futureExchanges } from "../../mockData/mockData";
-import { configConsumerProps } from "antd/es/config-provider";
+import { futureExchangeProducts, futureExchanges } from "../../mockData/mockData";
 
 // 这段代码主要是标识menuProps对象中items属性的值的类型，即数组中任意元素的类型
 type MenuItem = Required<MenuProps>['items'][number];
