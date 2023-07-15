@@ -7,7 +7,7 @@ import { TooltipComponent, TitleComponent } from 'echarts/components';
 
 echarts.use([TitleComponent, TooltipComponent, Grid3DComponent, Bar3DChart, CanvasRenderer]);
 
-export const Metal3DBarOptions = () => {
+export const Metal3DBarOptions = (contractData) => {
     return {
         title: {
             text: '广州期货交易所-GFEX',
@@ -41,7 +41,7 @@ export const Metal3DBarOptions = () => {
         xAxis3D: {
             name: '合约交易日期',
             type: 'category',
-            data: handleMetal3DBarDataXDate(),
+            data: handleMetal3DBarDataXDate(contractData),
             // data: xDateList,
             nameTextStyle: {
                 color: '#999',
@@ -82,7 +82,7 @@ export const Metal3DBarOptions = () => {
             // viewControl用于鼠标的旋转，缩放等视角控制
             // autoRotateSpeed 旋转速度
             viewControl: {
-                autoRotate: true,
+                autoRotate: false,
                 autoRotateSpeed: 4
             },
             // postEffect: 后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。
@@ -116,7 +116,7 @@ export const Metal3DBarOptions = () => {
         series: [
             {
                 type: 'bar3D',
-                data: handleContractData(),
+                data: contractData,
                 // data: contractData,
                 barSize: 4,
                 bevelSize: 0.4,

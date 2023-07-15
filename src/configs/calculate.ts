@@ -35,9 +35,14 @@ export const handleContractData = () => {
     return mockContractData;
 }
 
-export const handleMetal3DBarDataXDate = () => {
-    let xDate = mockContractData.map((item: any) => {
+export const handleMetal3DBarDataXDate = (contractData) => {
+    let xDate = contractData.map((item: any) => {
         return item[0]
     })
     return xDate;
+}
+
+// 响应参数格式化
+export const handleResContractData = (originalData) => {
+  return originalData.map(({ date, close, money }) => [date, close, money]);
 }
