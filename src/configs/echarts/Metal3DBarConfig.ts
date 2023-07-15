@@ -42,7 +42,7 @@ export const Metal3DBarOptions = (contractData) => {
             name: '合约交易日期',
             type: 'category',
             data: handleMetal3DBarDataXDate(contractData),
-            // data: xDateList,
+            // data: contractData.map(item => item[0]),
             nameTextStyle: {
                 color: '#999',
                 fontSize: 14,
@@ -117,7 +117,6 @@ export const Metal3DBarOptions = (contractData) => {
             {
                 type: 'bar3D',
                 data: contractData,
-                // data: contractData,
                 barSize: 4,
                 bevelSize: 0.4,
                 bevelSmoothness: 4,

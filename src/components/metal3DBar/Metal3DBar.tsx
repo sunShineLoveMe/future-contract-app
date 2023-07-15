@@ -6,13 +6,12 @@ import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
 import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
 import { ValueContext } from "../../context/ValueContext";
 import { handleResContractData } from '../../configs/calculate'
-
+import { ECBasicOption } from "echarts/types/dist/shared";
 
 export const Metal3DBar: React.FC = () => {
 
     const chartRef = useRef(null);
-    const [option, setOption] = useState(Metal3DBarOptions([]));
-    // const [option, setOption] = useState();
+    const [option, setOption] = useState<ECBasicOption>({});
     const [responseData, setResponseData] = useState(null);
     const { value } = useContext(ValueContext);
     console.log('菜单选型的值: value', value)
@@ -42,13 +41,11 @@ export const Metal3DBar: React.FC = () => {
                 height: 700,
             }
         );
-
-        if(option && typeof option === 'object'){
+        if (option && typeof option === 'object') {
             metal3DBarEchart.setOption(option);
         }
-        window.onresize = () => {
-            metal3DBarEchart.resize();
-        }
+        window.addEventListener('resize', () => metal3DBarEchart.resize());
+        return () => window.removeEventListener('resize', () => metal3DBarEchart.resize());
     }, [option])
     return (
         <div className={styles.charts} ref={chartRef} />
