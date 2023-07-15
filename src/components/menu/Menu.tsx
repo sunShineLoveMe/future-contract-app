@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CodeSandboxOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu as AntdMenu } from "antd";
 // import { futureExchangeProducts, futureExchanges } from "../../mockData/mockData";
 import axios from "axios";
+import { ValueContext } from "../../context/ValueContext";
 
 // 这段代码主要是标识menuProps对象中items属性的值的类型，即数组中任意元素的类型
 type MenuItem = Required<MenuProps>['items'][number];
-// console.log(futureExchangesCode);
 
 /**
  * 
@@ -35,8 +35,6 @@ function getItem(
 }
 
 const handleMenuOptions = (futureExchanges, futureExchangeProducts) => {
-    console.log(`futureExchanges: ${futureExchanges}`)
-    console.log(`futureExchangeProducts: ${futureExchangeProducts}`)
     const menuItems: any[] = [];
     futureExchanges.forEach((item: any) => {
         const exchangeProducts =
@@ -50,7 +48,7 @@ const handleMenuOptions = (futureExchanges, futureExchangeProducts) => {
                     let exchangeProductsSubMenuItems: any[] = [];
                     if (product && product.subItems && product.subItems.length > 0) {
                         exchangeProductsSubMenuItems = product.subItems.map((subItem: any) => {
-                            return getItem(`${subItem.name}`, subItem.code)
+                            return getItem(`${subItem.name}`, subItem.id)
                         })
                         return getItem(`${product.code}-${product.name}`,
                             product.code,
@@ -64,25 +62,11 @@ const handleMenuOptions = (futureExchanges, futureExchangeProducts) => {
     return menuItems;
 }
 
-const handleResExchangeInfo = (futureExchangesInfo) => {
-    if(futureExchangesInfo && futureExchangesInfo.code == 200){
-        console.log(`futureExchangesInfo: ${futureExchangesInfo.data}`)
-        return futureExchangesInfo.data;
-    }
-}
-
-const handleResExchangeProductsInfo = (futureExchangeProductsInfo) => {
-    if(futureExchangeProductsInfo && futureExchangeProductsInfo.code == 200){
-        console.log(`futureExchangeProductsInfo: ${futureExchangeProductsInfo.data}`)
-        return futureExchangeProductsInfo.data;
-    }
-}
-
-
 export const Menu: React.FC = () => {
     const [futureExchanges, setFutureExchanges] = useState<any[]>([]);
     const [futureExchangeProducts, setFutureExchangeProducts] = useState<any[]>([]);
     const [items, setItems] = useState<any[]>([]);
+    const { value, setValue } = useContext(ValueContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -99,13 +83,15 @@ export const Menu: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        if(futureExchanges && futureExchangeProducts) {
+        if (futureExchanges && futureExchangeProducts) {
             setItems(handleMenuOptions(futureExchanges, futureExchangeProducts))
         }
     }, [futureExchanges, futureExchangeProducts])
 
     const onClick: MenuProps['onClick'] = e => {
         console.log('click', e);
+        // 通过点击菜单将菜单项的key值传递给context供其他组件使用
+        setValue(e.key);
     }
     return (
         <AntdMenu

@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import * as echarts from 'echarts/core';
 import styles from './Metal3DBar.module.css'
 import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
 import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
+import { ValueContext } from "../../context/ValueContext";
 
 export const Metal3DBar: React.FC = () => {
 
     const chartRef = useRef(null);
-    const [option, setOption] = useState(Metal3DBarOptions);
+    const [option, setOption] = useState(Metal3DBarOptions());
+    // const [option, setOption] = useState();
+    const { value } = useContext(ValueContext);
+    console.log('菜单选型的值：value', value)
 
     useEffect(() => {
-        console.log(option)
         const metal3DBarEchart = echarts.init(
             chartRef.current as unknown as HTMLDivElement, undefined, {
                 width: 1000,
