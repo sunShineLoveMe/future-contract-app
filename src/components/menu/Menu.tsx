@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CodeSandboxOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Menu as AntdMenu } from "antd";
-// import { futureExchangeProducts, futureExchanges } from "../../mockData/mockData";
 import axios from "axios";
+import type { MenuProps } from "antd";
+import { Menu as AntdMenu, Spin } from "antd";
+// import { futureExchangeProducts, futureExchanges } from "../../mockData/mockData";
 import { ValueContext } from "../../context/ValueContext";
 
 // 这段代码主要是标识menuProps对象中items属性的值的类型，即数组中任意元素的类型
@@ -65,6 +65,7 @@ const handleMenuOptions = (futureExchanges, futureExchangeProducts) => {
 export const Menu: React.FC = () => {
     const [futureExchanges, setFutureExchanges] = useState<any[]>([]);
     const [futureExchangeProducts, setFutureExchangeProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(true); // 添加loading状态
     const [items, setItems] = useState<any[]>([]);
     const { value, setValue } = useContext(ValueContext);
 
@@ -77,6 +78,9 @@ export const Menu: React.FC = () => {
                 setFutureExchangeProducts(res2.data.data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                // 数据加载完，将loading状态设置为false
+                setLoading(false);
             }
         }
         fetchData();
@@ -93,6 +97,22 @@ export const Menu: React.FC = () => {
         // 通过点击菜单将菜单项的key值传递给context供其他组件使用
         setValue(e.key);
     }
+
+    if (loading) {
+        return (
+            <Spin
+                size="large"
+                style={{
+                    marginTop: 200,
+                    marginBottom: 200,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    width: "100%",
+                }}
+            />
+        )
+    }
+
     return (
         <AntdMenu
             mode="inline"

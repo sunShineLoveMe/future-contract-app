@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import * as echarts from 'echarts/core';
 import axios from "axios";
-import { Image } from "antd";
+import { Image, Spin } from "antd";
 import styles from './Metal3DBar.module.css'
 import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
 import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
 import { ValueContext } from "../../context/ValueContext";
 import { handleResContractData } from '../../configs/calculate'
 import { ECBasicOption } from "echarts/types/dist/shared";
-import girlImage  from "../../asserts/images/girl.png";
+import girlImage from "../../asserts/images/girl.png";
 
 export const Metal3DBar: React.FC = () => {
 
@@ -16,7 +16,7 @@ export const Metal3DBar: React.FC = () => {
     const [option, setOption] = useState<ECBasicOption>({});
     const [responseData, setResponseData] = useState(null);
     const { value } = useContext(ValueContext);
-    console.log('菜单选型的值: value', value)
+    const [loading, setLoading] = useState<boolean>(true); // 添加loading状态
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +27,9 @@ export const Metal3DBar: React.FC = () => {
                 }
             } catch (error) {
                 console.error(error);
+            } finally {
+                // 数据加载完，将loading状态设置为false
+                setLoading(false);
             }
         }
         fetchData();
@@ -39,23 +42,46 @@ export const Metal3DBar: React.FC = () => {
     }, [responseData])
 
     useEffect(() => {
-        const metal3DBarEchart = echarts.init(
-            chartRef.current as unknown as HTMLDivElement, undefined, {
-            width: 1000,
-            height: 700,
-        }
-        );
         if (option && typeof option === 'object') {
+            const metal3DBarEchart = echarts.init(
+                chartRef.current as unknown as HTMLDivElement, undefined, {
+                width: 1000,
+                height: 700,
+            }
+            );
             metal3DBarEchart.setOption(option);
+            // if (option && typeof option === 'object') {
+            //     metal3DBarEchart.setOption(option);
+            // }
+            window.addEventListener('resize', () => metal3DBarEchart.resize());
+            return () =>
+                window.removeEventListener('resize', () => metal3DBarEchart.resize());
         }
-        window.addEventListener('resize', () => metal3DBarEchart.resize());
-        return () => window.removeEventListener('resize', () => metal3DBarEchart.resize());
     }, [option])
+
+    if (loading) {
+        return (
+            <Spin
+                size="large"
+                style={{
+                    marginTop: 200,
+                    marginBottom: 200,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    width: "100%",
+                }}
+            />
+        )
+    }
+
     return (
-        value === "" ? 
-            <div className={styles.images}><Image width={600} height={700} src={girlImage} /></div> 
-            : 
-            <div className={styles.charts} ref={chartRef} />
-        // <div className={styles.charts} ref={chartRef} />
+        <>
+            {
+                value === "" ?
+                    <div className={styles.images}><Image width={600} height={700} src={girlImage} /></div>
+                    :
+                    <div className={styles.charts} ref={chartRef} />
+            }
+        </>
     )
 }
