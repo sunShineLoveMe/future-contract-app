@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Layout } from 'antd';
 import styles from "./App.module.css"
 import { Menu, Header, Footer, Metal3DBar } from './components';
-import { ValueContextProvider } from './context/ValueContext';
+import { ValueContextProvider, ValueContext } from './context/ValueContext';
 
 function App() {
+  // const { value } = useContext(ValueContext);
+  // console.log(`在app中${value}`)
   return (
     <ValueContextProvider>
       <div className={styles.App}>

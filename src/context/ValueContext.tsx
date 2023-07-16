@@ -10,12 +10,12 @@ interface ValueContextProviderProps {
 }
 
 export const ValueContext = createContext<ValueContextType>({
-    value: '1',
+    value: '',
     setValue: () => {}
 });
 
 export const ValueContextProvider: React.FC<ValueContextProviderProps> = ({ children }) => {
-    const [value, setValue] = useState('1');
+    const [value, setValue] = useState('');
     return (
         <ValueContext.Provider value={{ value, setValue }}>
             {children}
