@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import * as echarts from 'echarts/core';
 import axios from "axios";
-import { Image, Spin } from "antd";
+import { Image, Spin, Card } from "antd";
 import styles from './Metal3DBar.module.css'
 import { Metal3DBarOptions } from '../../configs/echarts/Metal3DBarConfig'
 import { Grid3DBarOptions } from "../../configs/echarts/Grid3DConfig";
@@ -81,7 +81,16 @@ export const Metal3DBar: React.FC = () => {
         <>
             {
                 value === "" ?
-                    <div className={styles.images}><Image width={600} height={700} src={girlImage} /></div>
+                    <div className={styles["image-wrapper"]}>
+                        <div className={styles["image-container"]}>
+                            <Image width={300}
+                                height={450}
+                                preview={false}
+                                rootClassName={styles["antd-card-image"]}
+                                src={girlImage}
+                            />
+                        </div>
+                    </div>
                     :
                     <div className={styles.charts} ref={chartRef} />
             }
