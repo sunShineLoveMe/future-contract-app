@@ -15,6 +15,7 @@ export const Metal3DBar: React.FC = () => {
     const chartRef = useRef<HTMLDivElement>(document.createElement('div'));
     const [option, setOption] = useState<ECBasicOption>({});
     const [responseData, setResponseData] = useState(null);
+    const [titleLabel, setTitleLabel] = useState("")
     const { value } = useContext(ValueContext);
     const [loading, setLoading] = useState<boolean>(true); // 添加loading状态
 
@@ -24,6 +25,7 @@ export const Metal3DBar: React.FC = () => {
                 if (value && value !== '') {
                     const response = await axios.get(`http://localhost:3000/detail/${value}`);
                     setResponseData(handleResContractData(response.data.data));
+                    setTitleLabel(response.data.data[0].menu_name)
                     setLoading(false);
                 }
             } catch (error) {
@@ -38,7 +40,7 @@ export const Metal3DBar: React.FC = () => {
 
     useEffect(() => {
         if (responseData) {
-            setOption(Metal3DBarOptions(responseData));
+            setOption(Metal3DBarOptions(responseData, titleLabel));
         }
     }, [responseData])
 
@@ -46,9 +48,9 @@ export const Metal3DBar: React.FC = () => {
         if (option && typeof option === 'object') {
             const metal3DBarEchart = echarts.init(
                 chartRef.current as unknown as HTMLDivElement, undefined, {
-                width: 1000,
-                height: 700,
-            }
+                    width: 1000,
+                    height: 700,
+                }
             );
             metal3DBarEchart.setOption(option);
             // if (option && typeof option === 'object') {

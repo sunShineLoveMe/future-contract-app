@@ -4,14 +4,15 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { Bar3DChart } from 'echarts-gl/charts';
 import { Grid3DComponent } from 'echarts-gl/components';
 import { TooltipComponent, TitleComponent } from 'echarts/components';
+import { futureExchanges } from '../../mockData/mockData';
 
 echarts.use([TitleComponent, TooltipComponent, Grid3DComponent, Bar3DChart, CanvasRenderer]);
 
-export const Metal3DBarOptions = (contractData) => {
+export const Metal3DBarOptions = (contractData, textLabel) => {
     return {
         title: {
-            text: '广州期货交易所-GFEX',
-            subtext: 'SI-工业硅',
+            text: futureExchanges.filter(item => item.code === textLabel.split('.')[1])[0].name,
+            subtext: textLabel.split('.')[0],
             textStyle: {
                 color: '#999',
                 fontSize: 14
