@@ -106,7 +106,7 @@ export const Metal3DBarOptions = (contractData) => {
                 },
                 // 使用纹理作为环境光的光源，会为物体提供漫反射和高光反射
                 ambientCubemap: {
-                    // texture: '../../assets/images/data-gl/asset/pisa.hdr',
+                    texture: '../../assets/images/data-gl/asset/pisa.hdr',
                     exposure: 1,
                     diffuseIntensity: 0.5,
                     specularIntensity: 0.5
