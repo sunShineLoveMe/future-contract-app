@@ -9,3 +9,10 @@
 .images {
     display: flex;
 }
+
+.loading {
+    width: 600px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+}

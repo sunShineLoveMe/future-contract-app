@@ -24,6 +24,7 @@ export const Metal3DBar: React.FC = () => {
                 if (value && value !== '') {
                     const response = await axios.get(`http://localhost:3000/detail/${value}`);
                     setResponseData(handleResContractData(response.data.data));
+                    setLoading(false);
                 }
             } catch (error) {
                 console.error(error);
@@ -61,16 +62,18 @@ export const Metal3DBar: React.FC = () => {
 
     if (loading) {
         return (
-            <Spin
-                size="large"
-                style={{
-                    marginTop: 200,
-                    marginBottom: 200,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    width: "100%",
-                }}
-            />
+            <div className={styles.loading}>
+                <Spin
+                    size="large"
+                    style={{
+                        marginTop: 200,
+                        marginBottom: 200,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "100%",
+                    }}
+                />
+            </div>
         )
     }
 

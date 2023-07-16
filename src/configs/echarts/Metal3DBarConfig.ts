@@ -82,8 +82,8 @@ export const Metal3DBarOptions = (contractData) => {
             // viewControl用于鼠标的旋转，缩放等视角控制
             // autoRotateSpeed 旋转速度
             viewControl: {
-                autoRotate: false,
-                autoRotateSpeed: 4
+                autoRotate: true,
+                autoRotateSpeed: 2
             },
             // postEffect: 后处理特效可以为画面添加高光、景深、环境光遮蔽（SSAO）、调色等效果。可以让整个画面更富有质感。
             // SSAO: 是否开启环境光遮蔽
