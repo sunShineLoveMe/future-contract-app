@@ -5,6 +5,7 @@ import type { MenuProps } from "antd";
 import { Menu as AntdMenu, Spin } from "antd";
 // import { futureExchangeProducts, futureExchanges } from "../../mockData/mockData";
 import { ValueContext } from "../../context/ValueContext";
+import configRoutes from "../../configs/routes";
 
 // 这段代码主要是标识menuProps对象中items属性的值的类型，即数组中任意元素的类型
 type MenuItem = Required<MenuProps>['items'][number];
@@ -72,9 +73,9 @@ export const Menu: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let res = await axios.get('http://localhost:3000/menuParentList');
+                let res = await axios.get(`${configRoutes.baseUrl}/menuParentList`);
                 setFutureExchanges(res.data.data);
-                let res2 = await axios.get('http://localhost:3000/menuList');
+                let res2 = await axios.get(`${configRoutes.baseUrl}/menuList`);
                 setFutureExchangeProducts(res2.data.data);
             } catch (error) {
                 console.error(error);

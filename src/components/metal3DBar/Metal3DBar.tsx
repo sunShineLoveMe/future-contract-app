@@ -9,6 +9,7 @@ import { ValueContext } from "../../context/ValueContext";
 import { handleResContractData } from '../../configs/calculate'
 import { ECBasicOption } from "echarts/types/dist/shared";
 import girlImage from "../../asserts/images/girl.png";
+import configRoutes from "../../configs/routes";
 
 export const Metal3DBar: React.FC = () => {
 
@@ -23,7 +24,7 @@ export const Metal3DBar: React.FC = () => {
         const fetchData = async () => {
             try {
                 if (value && value !== '') {
-                    const response = await axios.get(`http://localhost:3000/detail/${value}`);
+                    const response = await axios.get(`${configRoutes.baseUrl}/detail/${value}`);
                     setResponseData(handleResContractData(response.data.data));
                     setTitleLabel(response.data.data[0].menu_name)
                     setLoading(false);
