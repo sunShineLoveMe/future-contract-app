@@ -28,7 +28,7 @@
     /* backface-visibility: hidden; */
     transform-origin: center center;
     transform-style: preserve-3d; /* 将子元素在3D空间中呈现 */
-    animation: rotate 12s linear infinite;
+    animation: rotate 20s linear infinite;
 }
 
 @keyframes rotate {
